@@ -147,21 +147,27 @@ rl=document.getElementById("rl");
 
 let file=null;
 
-function slug(v){
- return String(v||"")
+// Penambahan param isTyping agar strip di akhir tidak dihapus paksa saat sedang ngetik
+function slug(v, isTyping = false){
+ let val = String(v||"")
   .toLowerCase()
   .trim()
   .replace(/[^a-z0-9-]+/g,"-")
-  .replace(/^-+|-+$/g,"")
   .replace(/-+/g,"-")
-  .slice(0,50)
+  .slice(0,50);
+  
+ return isTyping ? val : val.replace(/^-+|-+$/g,"");
 }
 
 function sync(){
- let n=slug(nameEl.value);
- nameEl.value=n;
- pv.textContent=n||"nama-project";
- go.disabled=!file||!n
+ // Raw tetap menjaga tanda (-) jika diletakkan di ujung, jadi ga auto-hapus saat diketik
+ let raw = slug(nameEl.value, true);
+ nameEl.value = raw;
+ 
+ // Output Vercel di preview menggunakan hasil full clean up slug()
+ let n = slug(raw);
+ pv.textContent = n || "nama-project";
+ go.disabled = !file || !n;
 }
 
 function show(c,t,x,url){
@@ -224,8 +230,9 @@ go.onclick=async()=>{
  try{
   const html=await file.text();
 
+  // Menambahkan ?skipAutoDetectionConfirmation=1 pada URL API
   const r=await fetch(
-   API_URL.replace(/\/$/,"")+"/api/deploy",
+   API_URL.replace(/\/$/,"")+"/api/deploy?skipAutoDetectionConfirmation=1",
    {
     method:"POST",
     headers:{
@@ -234,7 +241,11 @@ go.onclick=async()=>{
     body:JSON.stringify({
      projectName:project,
      fileName:file.name,
-     html
+     html,
+     // Menambahkan projectSettings sesuai error requirement vercel
+     projectSettings: {
+      framework: null
+     }
     })
    }
   );
