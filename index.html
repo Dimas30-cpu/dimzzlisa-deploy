@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dimzz Deploy</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:#050505;color:#fff}
+body{display:flex;justify-content:center;background:radial-gradient(circle at 50% -10%,#252525,transparent 38%),#050505}
+.wrap{width:min(980px,calc(100% - 28px));padding:28px 0 50px}.top{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:11px;align-items:center}.logo{width:40px;height:40px;border-radius:12px;background:#fff;color:#000;display:grid;place-items:center;font-weight:900}.brand b{font-size:16px}.brand small{display:block;color:#777;margin-top:2px;font-size:10px}
+.pill{border:1px solid #292929;border-radius:99px;padding:7px 11px;font-size:10px;color:#999}.green{display:inline-block;width:6px;height:6px;border-radius:50%;background:#31d17b;margin-right:6px}
+.hero{padding:80px 0 35px}.hero h1{font-size:clamp(42px,7vw,74px);line-height:.94;letter-spacing:-4px;margin:0}.hero h1 span{color:#666}.hero p{max-width:610px;color:#888;line-height:1.7;margin-top:20px;font-size:13px}
+.layout{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.card{background:#111;border:1px solid #252525;border-radius:21px;padding:21px}.title{display:flex;justify-content:space-between;margin-bottom:18px}.title b{font-size:13px}.tag{font-size:9px;border:1px solid #303030;border-radius:6px;padding:5px 7px;color:#888}
+label{font-size:11px;color:#aaa;display:block;margin-bottom:7px}input[type=text]{width:100%;border:1px solid #303030;background:#090909;color:#fff;border-radius:11px;padding:13px;outline:0}input[type=text]:focus{border-color:#777}
+.preview{font-size:10px;color:#666;margin-top:7px}.preview b{color:#aaa}
+.drop{height:235px;border:1px dashed #3b3b3b;border-radius:17px;margin-top:17px;display:grid;place-items:center;text-align:center;background:#0a0a0a;transition:.2s}.drop.drag{background:#151515;border-color:#aaa}.ico{width:52px;height:52px;border-radius:14px;background:#1c1c1c;display:grid;place-items:center;margin:0 auto 13px;font-size:22px}.drop h3{font-size:13px;margin:0 0 6px}.drop p{font-size:10px;color:#666;margin:0}.pick{display:inline-block;background:#fff;color:#000;border-radius:9px;padding:9px 13px;margin-top:14px;font-size:11px;font-weight:800;cursor:pointer}.drop input{display:none}.file{font-size:10px;color:#bbb;margin-top:10px;word-break:break-all}
+button{width:100%;border:0;border-radius:11px;background:#fff;color:#000;padding:14px;margin-top:17px;font-weight:800;cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}
+.rows{display:grid;gap:12px}.row{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #222;padding-bottom:11px;font-size:10px}.row span:first-child{color:#666}.row span:last-child;color:#ddd;text-align:right;word-break:break-all}
+.result{display:none;margin-top:14px;padding:13px;border:1px solid #282828;border-radius:12px;background:#090909}.result.show{display:block}.result.ok{border-color:#285c43}.result.bad{border-color:#653333}.rt{font-size:11px;font-weight:800;margin-bottom:5px}.rx{font-size:10px;color:#888;line-height:1.6;word-break:break-word}.result a{display:block;color:#fff;font-size:11px;margin-top:8px}.foot{text-align:center;color:#444;font-size:9px;margin-top:25px}
+@media(max-width:700px){.wrap{width:calc(100% - 18px)}.pill{display:none}.hero{padding:55px 0 28px}.hero h1{font-size:45px;letter-spacing:-2px}.layout{grid-template-columns:1fr}.card{padding:17px}.drop{height:220px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="logo">D</div><div><b>Dimzz Deploy</b><small>GitHub Pages → Vercel</small></div></div>
+ <div class="pill"><i class="green"></i>DEPLOY READY</div>
+</header>
+
+<section class="hero">
+ <h1>Upload once.<br><span>Deploy anywhere.</span></h1>
+ <p>Panel ini berjalan dari GitHub Pages. File HTML yang kamu upload akan dikirim ke API, dipublish sebagai <b>index.html</b> di Vercel, lalu source-nya dibackup ke Telegram.</p>
+</section>
+
+<main class="layout">
+<section class="card">
+ <div class="title"><b>New deployment</b><span class="tag">HTML</span></div>
+ <label>Nama project Vercel</label>
+ <input id="name" type="text" placeholder="dimzz-lisa" maxlength="50">
+ <div class="preview">URL: <b>https://<span id="pv">nama-project</span>.vercel.app</b></div>
+
+ <div class="drop" id="drop">
+  <div>
+   <div class="ico">↑</div>
+   <h3>Drop HTML file di sini</h3>
+   <p>Nama file boleh bebas, contoh dimzz.html</p>
+   <label class="pick" for="file">Pilih file</label>
+   <input id="file" type="file" accept=".html,text/html">
+   <div class="file" id="fn">Belum ada file</div>
+  </div>
+ </div>
+
+ <button id="go" disabled>Deploy ke Vercel</button>
+ <div class="result" id="res"><div class="rt" id="rt"></div><div class="rx" id="rx"></div><a id="rl" target="_blank" rel="noopener"></a></div>
+</section>
+
+<aside class="card">
+ <div class="title"><b>Deployment info</b><span class="tag">LIVE</span></div>
+ <div class="rows">
+  <div class="row"><span>Panel</span><span>GitHub Pages</span></div>
+  <div class="row"><span>Hosting hasil</span><span>Vercel</span></div>
+  <div class="row"><span>Source</span><span id="src">—</span></div>
+  <div class="row"><span>Published</span><span>index.html</span></div>
+  <div class="row"><span>Backup</span><span>Telegram</span></div>
+ </div>
+</aside>
+</main>
+<div class="foot">Dimzz Deploy · 2027</div>
+</div>
+
+<script>
+/*
+ * API backend Vercel.
+ * Contoh:
+ * https://dimzz-deploy-api.vercel.app
+ */
+const API_URL="https://api-vercel-theta-hazel.vercel.app/";
+
+const nameEl=document.getElementById("name"),pv=document.getElementById("pv"),fileEl=document.getElementById("file");
+const drop=document.getElementById("drop"),fn=document.getElementById("fn"),go=document.getElementById("go"),src=document.getElementById("src");
+const res=document.getElementById("res"),rt=document.getElementById("rt"),rx=document.getElementById("rx"),rl=document.getElementById("rl");
+let file=null;
+
+function slug(v){return String(v||"").toLowerCase().trim().replace(/[^a-z0-9-]+/g,"-").replace(/^-+|-+$/g,"").replace(/-+/g,"-").slice(0,50)}
+function sync(){let n=slug(nameEl.value);nameEl.value=n;pv.textContent=n||"nama-project";go.disabled=!file||!n}
+function show(c,t,x,url){res.className="result show "+c;rt.textContent=t;rx.textContent=x;rl.textContent=url?"Buka website →":"";rl.href=url||"#"}
+function select(f){
+ if(!f||!f.name.toLowerCase().endsWith(".html"))return show("bad","File tidak valid","Upload file dengan ekstensi .html");
+ file=f;fn.textContent=f.name+" · "+(f.size/1024).toFixed(1)+" KB";src.textContent=f.name;
+ if(!nameEl.value)nameEl.value=slug(f.name.replace(/\.html$/i,""));sync();
+}
+nameEl.oninput=sync;fileEl.onchange=()=>select(fileEl.files[0]);
+drop.ondragover=e=>{e.preventDefault();drop.classList.add("drag")};drop.ondragleave=()=>drop.classList.remove("drag");
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove("drag");select(e.dataTransfer.files[0])};
+
+go.onclick=async()=>{
+ if(!file)return;
+ const project=slug(nameEl.value);go.disabled=true;go.textContent="Deploying...";
+ show("","Deploying...","Mengirim file ke Vercel dan backup Telegram.");
+ try{
+  const html=await file.text();
+  const r=await fetch(API_URL.replace(/\/$/,"")+"/api/deploy",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({projectName:project,fileName:file.name,html})});
+  const d=await r.json();
+  if(!r.ok||!d.success)throw new Error(d.error||"Deployment gagal");
+  show("ok","Deployment berhasil 🚀","File "+file.name+" dipublish sebagai index.html. Telegram: "+(d.telegramSent?"terkirim":"gagal"),d.url);
+ }catch(e){show("bad","Deployment gagal",e.message)}
+ finally{go.textContent="Deploy ke Vercel";sync()}
+};
+</script>
+</body>
+</html>
