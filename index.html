@@ -246,7 +246,6 @@ go.onclick=async()=>{
   if(!r.ok||!d.success)
    throw new Error(d.error||"Deployment gagal");
 
-  // Bypass URL panjang dari Vercel dan paksa panggil domain asli project
   const finalDomain = "https://" + project + ".vercel.app";
 
   show(
@@ -274,4 +273,4 @@ go.onclick=async()=>{
 </script>
 
 </body>
-</html>
+ </html>
