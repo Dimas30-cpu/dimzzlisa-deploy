@@ -14,15 +14,85 @@ body{display:flex;justify-content:center;background:radial-gradient(circle at 50
 .pill{border:1px solid #292929;border-radius:99px;padding:7px 11px;font-size:10px;color:#999}.green{display:inline-block;width:6px;height:6px;border-radius:50%;background:#31d17b;margin-right:6px}
 .hero{padding:80px 0 35px}.hero h1{font-size:clamp(42px,7vw,74px);line-height:.94;letter-spacing:-4px;margin:0}.hero h1 span{color:#666}.hero p{max-width:610px;color:#888;line-height:1.7;margin-top:20px;font-size:13px}
 .layout{display:grid;grid-template-columns:1.3fr .7fr;gap:16px}.card{background:#111;border:1px solid #252525;border-radius:21px;padding:21px}.title{display:flex;justify-content:space-between;margin-bottom:18px}.title b{font-size:13px}.tag{font-size:9px;border:1px solid #303030;border-radius:6px;padding:5px 7px;color:#888}
-label{font-size:11px;color:#aaa;display:block;margin-bottom:7px}input[type=text]{width:100%;border:1px solid #303030;background:#090909;color:#fff;border-radius:11px;padding:13px;outline:0}input[type=text]:focus{border-color:#777}
+label{font-size:11px;color:#aaa;display:block;margin-bottom:7px}input[type=text],input[type=password]{width:100%;border:1px solid #303030;background:#090909;color:#fff;border-radius:11px;padding:13px;outline:0;transition:all .2s ease}
+input[type=text]:focus,input[type=password]:focus{border-color:#777}
 .preview{font-size:10px;color:#666;margin-top:7px}.preview b{color:#aaa}
 .drop{height:235px;border:1px dashed #3b3b3b;border-radius:17px;margin-top:17px;display:grid;place-items:center;text-align:center;background:#0a0a0a;transition:.2s}.drop.drag{background:#151515;border-color:#aaa}.ico{width:52px;height:52px;border-radius:14px;background:#1c1c1c;display:grid;place-items:center;margin:0 auto 13px;font-size:22px}.drop h3{font-size:13px;margin:0 0 6px}.drop p{font-size:10px;color:#666;margin:0}.pick{display:inline-block;background:#fff;color:#000;border-radius:9px;padding:9px 13px;margin-top:14px;font-size:11px;font-weight:800;cursor:pointer}.drop input{display:none}.file{font-size:10px;color:#bbb;margin-top:10px;word-break:break-all}
-button{width:100%;border:0;border-radius:11px;background:#fff;color:#000;padding:14px;margin-top:17px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}button:disabled{opacity:.4;cursor:not-allowed}
+button{width:100%;border:0;border-radius:11px;background:#fff;color:#000;padding:14px;margin-top:17px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s ease}button:disabled{opacity:.4;cursor:not-allowed}
 .rows{display:grid;gap:12px}.row{display:flex;justify-content:space-between;gap:15px;border-bottom:1px solid #222;padding-bottom:11px;font-size:10px}.row span:first-child{color:#666}.row span:last-child{color:#ddd;text-align:right;word-break:break-all}
 .result{display:none;margin-top:14px;padding:13px;border:1px solid #282828;border-radius:12px;background:#090909}.result.show{display:block}.result.ok{border-color:#285c43}.result.bad{border-color:#653333}.rt{font-size:11px;font-weight:800;margin-bottom:5px}.rx{font-size:10px;color:#888;line-height:1.6;word-break:break-word}.result a{display:block;color:#fff;font-size:11px;margin-top:8px}.foot{text-align:center;color:#444;font-size:9px;margin-top:25px}
 .spin{width:16px;height:16px;border:2px solid rgba(0,0,0,0.2);border-top-color:#000;border-radius:50%;animation:spin 0.7s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:700px){.wrap{width:calc(100% - 18px)}.pill{display:none}.hero{padding:55px 0 28px}.hero h1{font-size:45px;letter-spacing:-2px}.layout{grid-template-columns:1fr}.card{padding:17px}.drop{height:220px}}
+
+/* ==================================================
+ * STYLE SYSTEM ADMIN PREMIUM 2026 (GLASSMORPHISM & SPA)
+ * ================================================== */
+.top-right-group{display:flex;align-items:center;gap:10px}
+.btn-admin-nav{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:99px;padding:7px 16px;font-size:10px;font-weight:600;cursor:pointer;backdrop-filter:blur(10px);transition:all .3s ease;width:auto;margin:0}
+.btn-admin-nav:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.3);transform:translateY(-1px);box-shadow:0 0 15px rgba(255,255,255,0.1)}
+
+.view-section{display:none;opacity:0;transition:opacity .4s cubic-bezier(0.16,1,0.3,1),transform .4s cubic-bezier(0.16,1,0.3,1);transform:translateY(12px)}
+.view-section.active-view{display:block;opacity:1;transform:translateY(0)}
+
+/* GLASS CARD PREMIUM */
+.glass-card{background:rgba(18,18,22,0.65);border:1px solid rgba(255,255,255,0.08);backdrop-filter:blur(24px);border-radius:28px;padding:36px;box-shadow:0 25px 50px -12px rgba(0,0,0,0.7),inset 0 1px 1px rgba(255,255,255,0.1)}
+
+/* LOGIN CONTAINER */
+.admin-login-wrap{max-width:420px;margin:50px auto 0;position:relative}
+.admin-login-wrap::before{content:'';position:absolute;top:-50px;left:50%;transform:translateX(-50%);width:250px;height:250px;background:radial-gradient(circle,rgba(255,255,255,0.08) 0%,transparent 70%);filter:blur(30px);z-index:-1;pointer-events:none}
+.admin-logo-lg{width:64px;height:64px;border-radius:20px;background:#fff;color:#000;display:grid;place-items:center;font-size:28px;font-weight:900;margin:0 auto 20px;box-shadow:0 0 30px rgba(255,255,255,0.2)}
+.admin-header-title{text-align:center;margin-bottom:28px}
+.admin-header-title h2{font-size:24px;font-weight:800;letter-spacing:-0.5px;margin:0 0 6px}
+.admin-header-title p{font-size:12px;color:#71717a;margin:0}
+.form-group{margin-bottom:18px;text-align:left}
+.btn-login-submit{background:#fff;color:#000;font-weight:700;height:48px;border-radius:14px;margin-top:24px;box-shadow:0 0 20px rgba(255,255,255,0.15)}
+.btn-login-submit:hover{background:#e4e4e7;transform:scale(1.01)}
+
+/* LOADING SCREEN */
+.loading-wrap{max-width:480px;margin:80px auto 0;text-align:center}
+.progress-container{width:100%;height:8px;background:rgba(255,255,255,0.06);border-radius:99px;overflow:hidden;margin:28px 0 18px;position:relative;border:1px solid rgba(255,255,255,0.05)}
+.progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#fff,#a1a1aa);border-radius:99px;box-shadow:0 0 12px rgba(255,255,255,0.8);transition:width .1s linear}
+.progress-perc{font-size:48px;font-weight:900;letter-spacing:-2px;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.loading-status{font-size:12px;color:#a1a1aa;letter-spacing:0.5px;min-height:18px}
+
+/* DASHBOARD ADMIN */
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:12px;flex-wrap:wrap}
+.dash-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.stat-box{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);padding:18px;border-radius:18px}
+.stat-box small{display:block;color:#71717a;font-size:11px;margin-bottom:6px}
+.stat-box b{font-size:24px;font-weight:800}
+.dash-controls{display:flex;gap:12px;margin-bottom:20px;align-items:center}
+.search-input{flex:1;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1)}
+
+/* PROJECT LIST TABLE/CARDS */
+.project-grid{display:grid;gap:12px}
+.project-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:18px;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:all .2s ease}
+.project-card:hover{border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.04);transform:translateY(-2px)}
+.project-info b{font-size:14px;display:block;margin-bottom:4px;color:#fff}
+.project-info a{color:#a1a1aa;font-size:11px;text-decoration:none;display:inline-block}
+.project-info a:hover{color:#fff;text-decoration:underline}
+.project-meta{display:flex;gap:12px;align-items:center;margin-top:6px;font-size:10px;color:#71717a}
+.badge-status{padding:3px 8px;border-radius:99px;background:rgba(49,209,123,0.1);color:#31d17b;border:1px solid rgba(49,209,123,0.2);font-weight:600}
+.btn-delete{background:rgba(239,68,68,0.1);color:#ef4444;border:1px solid rgba(239,68,68,0.2);padding:8px 14px;border-radius:10px;font-size:11px;cursor:pointer;width:auto;margin:0;transition:all .2s}
+.btn-delete:hover{background:#ef4444;color:#fff;box-shadow:0 0 15px rgba(239,68,68,0.4)}
+.btn-sec{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.1);width:auto;margin:0;padding:8px 16px;border-radius:10px;font-size:11px}
+.btn-sec:hover{background:rgba(255,255,255,0.15)}
+
+/* MODAL CONFIRMATION */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);display:none;place-items:center;z-index:9999;opacity:0;transition:opacity .3s ease}
+.modal-overlay.show{display:grid;opacity:1}
+.modal-card{width:min(400px,calc(100% - 32px));background:#121215;border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:28px;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.8)}
+.modal-card h3{margin:0 0 8px;font-size:18px}
+.modal-card p{font-size:12px;color:#a1a1aa;margin:0 0 20px;line-height:1.5}
+.modal-btns{display:flex;gap:10px}
+.modal-btns button{flex:1;margin:0}
+
+@media(max-width:700px){
+ .wrap{width:calc(100% - 18px)}.pill{display:none}.hero{padding:55px 0 28px}.hero h1{font-size:45px;letter-spacing:-2px}.layout{grid-template-columns:1fr}.card{padding:17px}.drop{height:220px}
+ .project-card{flex-direction:column;align-items:flex-start}
+ .btn-delete{width:100%;margin-top:10px}
+ .glass-card{padding:24px;border-radius:20px}
+}
 </style>
 </head>
 <body>
@@ -37,96 +107,186 @@ button{width:100%;border:0;border-radius:11px;background:#fff;color:#000;padding
   </div>
  </div>
 
- <div class="pill">
-  <i class="green"></i>DEPLOY READY
+ <div class="top-right-group">
+  <div class="pill">
+   <i class="green"></i>DEPLOY READY
+  </div>
+  <button id="adminNavBtn" class="btn-admin-nav" onclick="showSection('adminLogin')">Admin</button>
  </div>
 </header>
 
-<section class="hero">
- <h1>Upload once.<br><span>Deploy anywhere.</span></h1>
- <p>
-  Panel ini berjalan dari <b>dimzz.axzy.my.id</b>.
-  File HTML yang kamu upload akan dikirim ke API, lalu
-  dipublish secara otomatis sebagai <b>index.html</b> di Vercel.
- </p>
-</section>
+<!-- ==================== VIEW 1: DEPLOY PANEL (USER BIASA) ==================== -->
+<div id="viewDeploy" class="view-section active-view">
+ <section class="hero">
+  <h1>Upload once.<br><span>Deploy anywhere.</span></h1>
+  <p>
+   Panel ini berjalan dari <b>dimzz.axzy.my.id</b>.
+   File HTML yang kamu upload akan dikirim ke API, lalu
+   dipublish secara otomatis sebagai <b>index.html</b> di Vercel.
+  </p>
+ </section>
 
-<main class="layout">
-
-<section class="card">
- <div class="title">
-  <b>New deployment</b>
-  <span class="tag">HTML</span>
- </div>
-
- <label>Nama project Vercel</label>
- <input id="name" type="text" placeholder="dimzz-lisa" maxlength="50">
-
- <div class="preview">
-  URL: <b>https://<span id="pv">nama-project</span>.vercel.app</b>
- </div>
-
- <div class="drop" id="drop">
-  <div>
-   <div class="ico">↑</div>
-   <h3>Drop HTML file di sini</h3>
-   <p>Nama file boleh bebas, contoh dimzz.html</p>
-
-   <label class="pick" for="file">Pilih file</label>
-   <input id="file" type="file" accept=".html,text/html">
-
-   <div class="file" id="fn">Belum ada file</div>
-  </div>
- </div>
-
- <button id="go" disabled>Deploy ke Vercel</button>
-
- <div class="result" id="res">
-  <div class="rt" id="rt"></div>
-  <div class="rx" id="rx"></div>
-  <a id="rl" target="_blank" rel="noopener"></a>
- </div>
-</section>
-
-<aside class="card">
- <div class="title">
-  <b>Deployment info</b>
-  <span class="tag">LIVE</span>
- </div>
-
- <div class="rows">
-  <div class="row">
-   <span>Panel</span>
-   <span>dimzz.axzy.my.id</span>
+ <main class="layout">
+ <section class="card">
+  <div class="title">
+   <b>New deployment</b>
+   <span class="tag">HTML</span>
   </div>
 
-  <div class="row">
-   <span>Hosting hasil</span>
-   <span>Vercel</span>
+  <label>Nama project Vercel</label>
+  <input id="name" type="text" placeholder="dimzz-lisa" maxlength="50">
+
+  <div class="preview">
+   URL: <b>https://<span id="pv">nama-project</span>.vercel.app</b>
   </div>
 
-  <div class="row">
-   <span>Source</span>
-   <span id="src">—</span>
+  <div class="drop" id="drop">
+   <div>
+    <div class="ico">↑</div>
+    <h3>Drop HTML file di sini</h3>
+    <p>Nama file boleh bebas, contoh dimzz.html</p>
+
+    <label class="pick" for="file">Pilih file</label>
+    <input id="file" type="file" accept=".html,text/html">
+
+    <div class="file" id="fn">Belum ada file</div>
+   </div>
   </div>
 
-  <div class="row">
-   <span>Published</span>
-   <span>index.html</span>
+  <button id="go" disabled>Deploy ke Vercel</button>
+
+  <div class="result" id="res">
+   <div class="rt" id="rt"></div>
+   <div class="rx" id="rx"></div>
+   <a id="rl" target="_blank" rel="noopener"></a>
+  </div>
+ </section>
+
+ <aside class="card">
+  <div class="title">
+   <b>Deployment info</b>
+   <span class="tag">LIVE</span>
+  </div>
+
+  <div class="rows">
+   <div class="row">
+    <span>Panel</span>
+    <span>dimzz.axzy.my.id</span>
+   </div>
+
+   <div class="row">
+    <span>Hosting hasil</span>
+    <span>Vercel</span>
+   </div>
+
+   <div class="row">
+    <span>Source</span>
+    <span id="src">—</span>
+   </div>
+
+   <div class="row">
+    <span>Published</span>
+    <span>index.html</span>
+   </div>
+  </div>
+ </aside>
+ </main>
+</div>
+
+<!-- ==================== VIEW 2: LOGIN ADMIN ==================== -->
+<div id="adminLogin" class="view-section">
+ <div class="admin-login-wrap glass-card">
+  <div class="admin-logo-lg">D</div>
+  <div class="admin-header-title">
+   <h2>Admin Access</h2>
+   <p>Masukkkan kredensial untuk mengelola project</p>
+  </div>
+  <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+   <div class="form-group">
+    <label>Username</label>
+    <input type="text" id="adminUser" placeholder="Masukkan username" required autocomplete="off">
+   </div>
+   <div class="form-group">
+    <label>Password</label>
+    <input type="password" id="adminPass" placeholder="••••••••" required>
+   </div>
+   <button type="submit" id="loginBtn" class="btn-login-submit">Login Ke Dashboard</button>
+  </form>
+  <div class="result" id="adminLoginRes">
+   <div class="rt" id="adminLoginRt"></div>
+   <div class="rx" id="adminLoginRx"></div>
+  </div>
+  <button onclick="showSection('viewDeploy')" class="btn-sec" style="width:100%; margin-top:14px;">← Kembali ke Deploy</button>
+ </div>
+</div>
+
+<!-- ==================== VIEW 3: LOADING SCREEN PREMIUM ==================== -->
+<div id="adminLoading" class="view-section">
+ <div class="loading-wrap glass-card">
+  <div class="progress-perc" id="loadingPerc">0%</div>
+  <div class="progress-container">
+   <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="loading-status" id="loadingStatus">Initializing Admin Environment...</div>
+ </div>
+</div>
+
+<!-- ==================== VIEW 4: DASHBOARD ADMIN ==================== -->
+<div id="adminDashboard" class="view-section">
+ <div class="glass-card" style="margin-top:30px;">
+  <div class="dash-header">
+   <div>
+    <h2 style="margin:0 0 4px; font-size:22px;">Project Manager</h2>
+    <span style="font-size:12px; color:#71717a;">Kelola seluruh deployment Vercel secara realtime</span>
+   </div>
+   <div style="display:flex; gap:8px;">
+    <button onclick="showSection('viewDeploy')" class="btn-sec">Deploy View</button>
+    <button onclick="logoutAdmin()" class="btn-sec" style="color:#ef4444; border-color:rgba(239,68,68,0.2);">Logout</button>
+   </div>
+  </div>
+
+  <div class="dash-stats">
+   <div class="stat-box">
+    <small>Total Project Active</small>
+    <b id="statTotal">0</b>
+   </div>
+   <div class="stat-box">
+    <small>System Status</small>
+    <b style="color:#31d17b; font-size:16px;">CONNECTED</b>
+   </div>
+  </div>
+
+  <div class="dash-controls">
+   <input type="text" id="projectSearch" class="search-input" placeholder="Cari project Vercel..." oninput="filterProjects()">
+   <button onclick="fetchProjects()" class="btn-sec" style="padding:13px 18px;">Refresh</button>
+  </div>
+
+  <div class="project-grid" id="projectList">
+   <!-- Realtime list rendered via JS -->
   </div>
  </div>
-</aside>
-
-</main>
+</div>
 
 <div class="foot">Dimzz Deploy · 2027</div>
 
 </div>
 
+<!-- MODAL KONFIRMASI DELETE -->
+<div class="modal-overlay" id="deleteModal">
+ <div class="modal-card">
+  <h3 style="color:#ef4444;">Hapus Project?</h3>
+  <p>Apakah Anda yakin ingin menghapus project <b id="delProjName" style="color:#fff;"></b>? Tindakan ini tidak dapat dibatalkan.</p>
+  <div class="modal-btns">
+   <button onclick="closeDeleteModal()" class="btn-sec">Batal</button>
+   <button onclick="confirmDeleteProject()" class="btn-delete" style="width:auto;">Hapus Sekarang</button>
+  </div>
+ </div>
+</div>
+
 <script>
-/*
- * API backend Vercel.
- */
+/* ==================================================
+ * LOGIKA ASLI DEPLOYMENT VERCEL (TIDAK DIUBAH)
+ * ================================================== */
 const API_URL="https://api-vercel-theta-hazel.vercel.app/";
 
 const nameEl=document.getElementById("name"),
@@ -272,6 +432,221 @@ go.onclick=async()=>{
 
  }
 };
+
+/* ==================================================
+ * SISTEM ADMIN TERINTEGRASI (SPA & REALTIME VERCEL)
+ * ================================================== */
+
+// PENTING: Sesuai Rule 5, MASTER_KEY TIDAK BOLEH DISIMPAN DI SINI.
+const BIN_ID = "6ac50dbdffd5d16053531f21"; 
+
+let allProjects = [];
+let targetDeleteProject = null;
+
+// Routing Single Page Application (SPA)
+function showSection(sectionId) {
+ const sections = document.querySelectorAll('.view-section');
+ sections.forEach(sec => {
+  sec.classList.remove('active-view');
+  setTimeout(() => {
+   if(!sec.classList.contains('active-view')) sec.style.display = 'none';
+  }, 400);
+ });
+
+ const target = document.getElementById(sectionId);
+ target.style.display = 'block';
+ setTimeout(() => {
+  target.classList.add('active-view');
+ }, 20);
+
+ const navBtn = document.getElementById('adminNavBtn');
+ if (sectionId === 'viewDeploy') {
+  navBtn.style.display = 'inline-block';
+ } else {
+  navBtn.style.display = 'none';
+ }
+}
+
+// Handler Login via JSONBin
+async function handleAdminLogin(e) {
+ e.preventDefault();
+ const u = document.getElementById('adminUser').value.trim();
+ const p = document.getElementById('adminPass').value.trim();
+ const loginBtn = document.getElementById('loginBtn');
+ const adminRes = document.getElementById('adminLoginRes');
+ const adminRt = document.getElementById('adminLoginRt');
+ const adminRx = document.getElementById('adminLoginRx');
+
+ loginBtn.disabled = true;
+ loginBtn.innerHTML = '<div class="spin"></div> Authenticating...';
+ adminRes.className = 'result';
+
+ try {
+  const res = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+   headers: { "X-Bin-Meta": "false" }
+  });
+  
+  if (!res.ok) throw new Error("Gagal terhubung ke server autentikasi.");
+  const data = await res.json();
+
+  if (data.username === u && data.password === p) {
+   adminRes.className = 'result show ok';
+   adminRt.textContent = "Login Berhasil";
+   adminRx.textContent = "Menyiapkan sesi admin...";
+   setTimeout(() => {
+    runLoadingSequence();
+   }, 600);
+  } else {
+   throw new Error("Username atau password salah.");
+  }
+ } catch (err) {
+  adminRes.className = 'result show bad';
+  adminRt.textContent = "Akses Ditolak";
+  adminRx.textContent = err.message;
+ } finally {
+  loginBtn.disabled = false;
+  loginBtn.innerHTML = 'Login Ke Dashboard';
+ }
+}
+
+// Loading Sequence Animasi Smooth 0% -> 100%
+function runLoadingSequence() {
+ showSection('adminLoading');
+ let progress = 0;
+ const bar = document.getElementById('progressBar');
+ const perc = document.getElementById('loadingPerc');
+ const status = document.getElementById('loadingStatus');
+
+ const statuses = [
+  { p: 10, t: "Initializing Admin Environment..." },
+  { p: 30, t: "Authenticating Session..." },
+  { p: 50, t: "Loading Project Manager..." },
+  { p: 70, t: "Synchronizing Deployment Data..." },
+  { p: 85, t: "Fetching Project Information..." },
+  { p: 95, t: "Preparing Dashboard..." },
+  { p: 100, t: "Loading Complete..." }
+ ];
+
+ const timer = setInterval(() => {
+  progress += 1;
+  bar.style.width = progress + '%';
+  perc.textContent = progress + '%';
+
+  const currentStatus = statuses.find(s => s.p === progress);
+  if (currentStatus) {
+   status.textContent = currentStatus.t;
+  }
+
+  if (progress >= 100) {
+   clearInterval(timer);
+   setTimeout(() => {
+    showSection('adminDashboard');
+    fetchProjects();
+   }, 400);
+  }
+ }, 25);
+}
+
+// Fetch Projects Realtime dari API Vercel
+async function fetchProjects() {
+ const list = document.getElementById('projectList');
+ list.innerHTML = '<div style="text-align:center; padding:40px; color:#71717a;"><div class="spin" style="margin:0 auto 12px; width:24px; height:24px; border-width:3px;"></div>Memuat data project...</div>';
+
+ try {
+  const res = await fetch(API_URL.replace(/\/$/,"") + "/api/projects");
+  const data = await res.json();
+
+  if (!res.ok || !data.success) throw new Error(data.error || "Gagal mengambil daftar project");
+
+  allProjects = data.projects || [];
+  renderProjects(allProjects);
+ } catch (err) {
+  list.innerHTML = `<div style="text-align:center; padding:30px; color:#ef4444; background:rgba(239,68,68,0.05); border-radius:14px;">Error: ${err.message}</div>`;
+ }
+}
+
+// Render Project Card
+function renderProjects(projects) {
+ const list = document.getElementById('projectList');
+ document.getElementById('statTotal').textContent = projects.length;
+
+ if (projects.length === 0) {
+  list.innerHTML = '<div style="text-align:center; padding:40px; color:#71717a;">Tidak ada project ditemukan.</div>';
+  return;
+ }
+
+ list.innerHTML = projects.map(p => {
+  const name = p.name || "Unnamed Project";
+  const url = `https://${name}.vercel.app`;
+  const date = p.createdAt ? new Date(p.createdAt).toLocaleDateString('id-ID', { day:'numeric', month:'short', year:'numeric' }) : 'N/A';
+  
+  return `
+   <div class="project-card">
+    <div class="project-info">
+     <b>${name}</b>
+     <a href="${url}" target="_blank" rel="noopener">${url} ↗</a>
+     <div class="project-meta">
+      <span class="badge-status">READY</span>
+      <span>ID: ${p.id || '-'}</span>
+      <span>•</span>
+      <span>${date}</span>
+     </div>
+    </div>
+    <div>
+     <button onclick="openDeleteModal('${name}')" class="btn-delete">Delete</button>
+    </div>
+   </div>
+  `;
+ }).join('');
+}
+
+// Filter Realtime Search
+function filterProjects() {
+ const q = document.getElementById('projectSearch').value.toLowerCase();
+ const filtered = allProjects.filter(p => (p.name || '').toLowerCase().includes(q));
+ renderProjects(filtered);
+}
+
+// Delete Modal Handlers
+function openDeleteModal(projectName) {
+ targetDeleteProject = projectName;
+ document.getElementById('delProjName').textContent = projectName;
+ document.getElementById('deleteModal').classList.add('show');
+}
+
+function closeDeleteModal() {
+ targetDeleteProject = null;
+ document.getElementById('deleteModal').classList.remove('show');
+}
+
+async function confirmDeleteProject() {
+ if (!targetDeleteProject) return;
+ const name = targetDeleteProject;
+ closeDeleteModal();
+
+ const list = document.getElementById('projectList');
+ list.innerHTML = `<div style="text-align:center; padding:40px; color:#71717a;"><div class="spin" style="margin:0 auto 12px; width:24px; height:24px; border-width:3px;"></div>Menghapus project ${name}...</div>`;
+
+ try {
+  const res = await fetch(API_URL.replace(/\/$/,"") + `/api/projects/${name}`, {
+   method: 'DELETE'
+  });
+  const data = await res.json();
+
+  if (!res.ok || !data.success) throw new Error(data.error || "Gagal menghapus project");
+  
+  fetchProjects();
+ } catch (err) {
+  alert("Gagal menghapus: " + err.message);
+  fetchProjects();
+ }
+}
+
+function logoutAdmin() {
+ showSection('viewDeploy');
+ document.getElementById('adminLoginForm').reset();
+ document.getElementById('adminLoginRes').className = 'result';
+}
 </script>
 
 </body>
